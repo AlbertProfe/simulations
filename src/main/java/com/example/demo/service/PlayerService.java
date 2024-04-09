@@ -1,32 +1,28 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Simulation;
 import com.example.demo.model.Subscription;
-import com.example.demo.model.Player;
-import com.example.demo.repository.PlayerRepository;
-import com.example.demo.repository.SimulationRepository;
-import com.github.javafaker.Faker;
+import com.example.demo.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.github.javafaker.Faker;
 
 import java.util.*;
+
 
 @Service
 public class PlayerService {
 
+    //static ArrayList<ubscription> subscriptions = new ArrayList<>();
 
     @Autowired
-    PlayerRepository playerRepository;
-    @Autowired
-    SimulationService simulationService;
+    SubscriptionRepository subscriptionRepository;
 
-    public void populate() {
+    public List<Subscription> createFakeSubscriptions() {
 
         // locale in english
         Faker faker = new Faker(new Locale("en-GB"));
-
-        List<Simulation> simulations;
-        //Date date = new Date();
+        Date date = new Date();
+        List<Subscription> subscriptions = new ArrayList<>();
 
         // ref variable creation UUID
         String uniqueID;
@@ -34,55 +30,30 @@ public class PlayerService {
         for (int i = 0; i <10 ; i++ ){
 
             uniqueID = UUID.randomUUID().toString();
-            Player player =  new Player();
-            player.setId(uniqueID);
-            player.setActive(true);
-            player.setPlayer( faker.artist().name());
-            player.setAge(faker.number().numberBetween(10, 100));
+            Subscription subscription = new Subscription( uniqueID,
+                    date.toString(),
+                    faker.number().numberBetween(10, 100),
+                    faker.bool().bool(), null 
+            );
+            subscriptions.add(subscription);
 
-            simulations = simulationService.createFakeSimulations();
-
-            for (int j = 0; j <10 ; j++ ) {
-                player.addSimulation(simulations.get(j));
-            }
-            playerRepository.save(player);
 
         }
+
+        return subscriptions;
     }
 
-    @Autowired
-    PlayerRepository playerRepositorySubscription;
-    @Autowired
-    SubscriptionService subscriptionService;
+    public List<Subscription> populate() {
 
-    public void populateSubscriptionDB() {
-
-        // locale in english
-        Faker faker = new Faker(new Locale("en-GB"));
-
-        List<Subscription> subscriptions;
-        //Date date = new Date();
-
-        // ref variable creation UUID
-        String uniqueID;
+        List<Subscription> subscriptions = createFakeSubscriptions();
 
         for (int i = 0; i <10 ; i++ ){
-
-            uniqueID = UUID.randomUUID().toString();
-            Player player =  new Player();
-            player.setId(uniqueID);
-            player.setActive(true);
-            player.setPlayer( faker.artist().name());
-            player.setAge(faker.number().numberBetween(10, 100));
-
-            subscriptions = subscriptionService.createFakeSubscriptions();
-
-            for (int j = 0; j <10 ; j++ ) {
-                subscriptions.add(subscriptions.get(j));
-            }
-            playerRepository.save(player);
-
+            subscriptionRepository.save(subscriptions.get(i));
+            subscriptions.add(subscriptions.get(i));
         }
+
+        return subscriptions;
     }
+
+
 }
-
