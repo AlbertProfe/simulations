@@ -40,7 +40,7 @@ public class PlayerService {
             player.setId(uniqueID);
             player.setActive(true);
             player.setPlayer( faker.artist().name());
-            player.setAge(faker.number().numberBetween(10, 100));
+            player.setAge(faker.number().numberBetween(1, 12));
 
             subscriptions = subscriptionService.createFakeSubscriptions();
             simulations = simulationService.createFakeSimulations();

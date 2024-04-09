@@ -36,7 +36,7 @@ public class SubscriptionService {
             uniqueID = UUID.randomUUID().toString();
             Subscription subscription = new Subscription( uniqueID,
                     date.toString(),
-                    faker.number().numberBetween(10, 100),
+                    faker.number().numberBetween(1, 12),
                     faker.bool().bool(), null 
             );
             subscriptions.add(subscription);
