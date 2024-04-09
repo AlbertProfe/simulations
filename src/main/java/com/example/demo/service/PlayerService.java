@@ -39,6 +39,8 @@ public class PlayerService {
             player.setPlayer( faker.artist().name());
             player.setAge(faker.number().numberBetween(10, 100));
 
+            directions = directionService.createFakeDirections();
+
             simulations = simulationService.createFakeSimulations();
 
             for (int j = 0; j <10 ; j++ ) {
