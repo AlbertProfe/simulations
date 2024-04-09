@@ -33,4 +33,13 @@ public class Player {
         //if (simulation.getId() != null) simulation.getId().getSimulations().remove(simulation);
         simulation.setPlayer(this);
     }
+
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    private List<Subscription> subscriptions = new ArrayList<>();
+
+    public void addSubscription(Subscription subscription) {
+        this.getSubscriptions().add(subscription);
+        //if (subscription.getId() != null) subscription.getId().getSubscription().remove(subscription);
+        subscription.setPlayer(this);
+    }
 }
