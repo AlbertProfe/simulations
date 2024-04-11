@@ -78,7 +78,7 @@ public class SimulationRestController {
     }
 
     @RequestMapping("/populate")
-    public String populateDB(){
+    public String populateSimulationDB(){
 
         simulationService.populate();
 
