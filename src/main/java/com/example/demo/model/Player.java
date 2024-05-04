@@ -20,6 +20,13 @@ public class Player {
     private int age;
     private boolean active;
 
+    private List<String> imagePlayerIds = new ArrayList<>();
+
+    public void addImagePlayerId(String imagePlayerId){
+        this.getImagePlayerIds().add(imagePlayerId);
+    }
+
+    
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     private List<Simulation> simulations = new ArrayList<>();
 

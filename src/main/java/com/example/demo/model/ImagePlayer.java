@@ -1,5 +1,5 @@
 package com.example.demo.model;
-
+import org.bson.types.Binary;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,10 +13,10 @@ public class ImagePlayer {
 
     @Id
     private String id;
-    private String nameImage;
+    private String imageName;
     private String type;
     private Double size;
-    private Byte dateImage;
-
+    private Binary imageData;
+    private String playerId;
 
 }

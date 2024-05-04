@@ -14,6 +14,7 @@ import java.util.List;
 
 @Component
 public class RunnerFillingDB implements ApplicationRunner {
+    //https://javadzone.com/spring-boot-runners-commandline-vs-application/
     @Autowired
     PlayerService playerService;
     @Autowired
@@ -26,11 +27,11 @@ public class RunnerFillingDB implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        populateDB();
-        testSimulationsMongoDB();
+        //populate_H2_DB();
+        //testSimulationsMongoDB();
     }
 
-    public void populateDB(){
+    public void populate_H2_DB(){
         //simulationService.populate();
         trafficTrialService.populate();
         //universityService.populate();
@@ -41,7 +42,7 @@ public class RunnerFillingDB implements ApplicationRunner {
 
     public void testSimulationsMongoDB() {
 
-        imagePlayerService.populate();
+        //imagePlayerService.populate();
 
         List<ImagePlayer> images = imagePlayerService.findAllImages();
 
@@ -49,7 +50,7 @@ public class RunnerFillingDB implements ApplicationRunner {
             System.out.println(imagePlayer);
         }
 
-        //imagePlayerService.deleteAll();
+        //imagePlayerService.deleteAllImages();
 
     }
 }
